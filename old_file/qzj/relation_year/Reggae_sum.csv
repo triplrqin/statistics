@@ -1,0 +1,10 @@
+,Unnamed: 0,Unnamed: 0.1,genre,year,nodes_num,links_num,nodes_sum,links_sum
+0,6,6,Reggae,1930,0,0,0,0
+1,5,5,Reggae,1940,3,2,3,2
+2,3,3,Reggae,1950,0,0,3,2
+3,2,2,Reggae,1960,34,60,37,62
+4,4,4,Reggae,1970,51,106,88,168
+5,0,0,Reggae,1980,19,29,107,197
+6,1,1,Reggae,1990,14,12,121,209
+7,7,7,Reggae,2000,6,5,127,214
+8,8,8,Reggae,2010,0,0,127,214

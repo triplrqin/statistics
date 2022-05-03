@@ -1,0 +1,10 @@
+,Unnamed: 0,Unnamed: 0.1,genre,year,nodes_num,links_num,nodes_sum,links_sum
+0,6,6,Religious,1930,2,1,2,1
+1,5,5,Religious,1940,2,1,4,2
+2,3,3,Religious,1950,8,6,12,8
+3,2,2,Religious,1960,7,6,19,14
+4,4,4,Religious,1970,4,3,23,17
+5,0,0,Religious,1980,19,19,42,36
+6,1,1,Religious,1990,16,14,58,50
+7,7,7,Religious,2000,7,4,65,54
+8,8,8,Religious,2010,0,0,65,54

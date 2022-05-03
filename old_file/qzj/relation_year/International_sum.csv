@@ -1,0 +1,10 @@
+,Unnamed: 0,Unnamed: 0.1,genre,year,nodes_num,links_num,nodes_sum,links_sum
+0,6,6,International,1930,0,0,0,0
+1,5,5,International,1940,2,1,2,1
+2,3,3,International,1950,12,8,14,9
+3,2,2,International,1960,30,26,44,35
+4,4,4,International,1970,20,16,64,51
+5,0,0,International,1980,9,6,73,57
+6,1,1,International,1990,7,4,80,61
+7,7,7,International,2000,0,0,80,61
+8,8,8,International,2010,0,0,80,61

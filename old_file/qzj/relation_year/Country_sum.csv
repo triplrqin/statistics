@@ -1,0 +1,10 @@
+,Unnamed: 0,genre,year,nodes_num,links_num,nodes_sum,links_sum
+6,6,Country,1930,8,10,8,10
+5,5,Country,1940,29,41,37,51
+3,3,Country,1950,75,118,112,169
+2,2,Country,1960,92,110,204,279
+4,4,Country,1970,48,61,252,340
+0,0,Country,1980,24,21,276,361
+1,1,Country,1990,74,144,350,505
+7,7,Country,2000,6,3,356,508
+8,8,Country,2010,0,0,356,508
