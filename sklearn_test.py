@@ -34,5 +34,5 @@ print(np.unique(yhat, return_counts=True))
 # 合并label
 full_music_data['label'] = yhat
 
-full_music_data.to_csv('./data/full_music_data_with_genre.csv', index=False)
+full_music_data.to_csv('./data/full_music_data_with_genre.csv')
 print(0)
