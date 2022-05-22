@@ -2,16 +2,19 @@ import pandas as pd
 import numpy as np
 from sklearn import preprocessing
 import sklearn.cluster as sc
-full_music_data = pd.read_csv('./data/full_music_data.csv')
-features = ['danceability','energy','valence','tempo','loudness',  'acousticness',  'instrumentalness',  'liveness',  'speechiness',  'duration_ms']
+
+#full_music_data = pd.read_csv('./data/full_music_data.csv')
+#features = ['danceability','energy','valence','tempo','loudness',  'acousticness',  'instrumentalness',  'liveness',  'speechiness',  'duration_ms']
 #pd.set_option('max_colwidth',100)
+top_music = pd.read_csv('./data/music_top100_nolabel.csv')
+PCA_list = ['PC1','PC2','PC3','PC4','PC5','PC6','PC7']
 
 # min-max标准化
 min_max = preprocessing.MinMaxScaler()
-music_data = full_music_data[features].values
+music_data = top_music[PCA_list].values
 music_data = min_max.fit_transform(music_data)
 
-num_clusters = 5
+num_clusters = 4
 #常见聚类模型 以下10个聚类方法需要用谁把谁注释掉即可
 #model = sc.AffinityPropagation(damping=0.9)#亲和力传播（运行太慢）
 #model = sc.AgglomerativeClustering(n_clusters=num_clusters)# 聚合聚类
@@ -32,7 +35,7 @@ yhat = model.fit_predict(music_data)
 print(np.unique(yhat, return_counts=True))
 
 # 合并label
-full_music_data['label'] = yhat
+top_music['label'] = yhat
 
-full_music_data.to_csv('./data/full_music_data_with_genre.csv')
+top_music.to_csv('./data/music_top100_4_label.csv')
 print(0)
