@@ -14,7 +14,7 @@ min_max = preprocessing.MinMaxScaler()
 music_data = top_music[PCA_list].values
 music_data = min_max.fit_transform(music_data)
 
-num_clusters = 4
+num_clusters = 5
 #常见聚类模型 以下10个聚类方法需要用谁把谁注释掉即可
 #model = sc.AffinityPropagation(damping=0.9)#亲和力传播（运行太慢）
 model = sc.AgglomerativeClustering(n_clusters=num_clusters)# 聚合聚类
@@ -37,5 +37,5 @@ print(np.unique(yhat, return_counts=True))
 # 合并label
 top_music['label'] = yhat
 
-top_music.to_csv('./data/music_top100_4_label.csv')
+top_music.to_csv('./data/music_top100_5_label.csv')
 print(0)
