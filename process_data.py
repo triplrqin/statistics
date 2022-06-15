@@ -15,11 +15,13 @@ def get_name_by_id(artist_id):
     artist_name = artist_id_df['artist_name']
     return artist_name.values[0]
 
+top_id = pd.read_csv('./data/Top_100_ID.csv')
+full_music_data = pd.read_csv('./data/full_music_data.csv')
 def get_music_by_id():
     for ID in top_id['artist_id']:
         full_music_data.loc[full_music_data['artists_id'].str.contains(str(ID)),'contains'] = True 
     music_data = full_music_data.loc[full_music_data['contains'] == True]
-    #music_data.to_csv('./data/music_data_top100.csv', index=False, encoding='utf-8')
+    music_data.to_csv('./data/music_data_top100.csv', index=False, encoding='utf-8')
     return music_data
 
 def process_pca(music_data):
