@@ -2,42 +2,72 @@
 
 \chapter{Cluster Analysis}
 
-% 这是中文
-% 在原始的数据中，我们将艺术家划分了流派，但是一个人创作的音乐可能有着不同的风格，因此我们要对音乐的数据进行聚类分析，并对其进行分类。在聚类的方法上，选用了K-means聚类和层次聚类两种方法，并对聚类的结果进行了评估。
-
+%% 这是中文
+%% 在原始的数据中，我们将艺术家划分了流派，但是一个人创作的音乐可能有着不同的风格，因此我们要对音乐的数据进行聚类分析，并对其进行分类。在聚类的方法上，选用了K-means聚类和层次聚类两种方法，并对聚类的结果进行了评估。
+In the original data, we divided the artists into genres, but the music created by one person may have different styles, so we need to cluster the music data and classify it. In the clustering method, two methods, K-means clustering and hierarchical clustering, are selected, and the clustering results are evaluated.
 
 \section{Data Preprocessing}
-% 在进行聚类分析之前，需要对数据进行预处理。将数据处理成多维度的向量，可以将每个向量视为一个样本点，从而计算样本点间的距离，
+%% 在进行聚类分析之前，需要对数据进行预处理。将数据处理成多维度的向量，可以将每个向量视为一个样本点，从而计算样本点间的距离，进而判断各个样本点的归属。
+Before performing cluster analysis, the data needs to be preprocessed. The data is processed into multi-dimensional vectors, and each vector can be regarded as a sample point, so as to calculate the distance between the sample points, and then determine the ownership of each sample point.
 \subsection{Entropy Weight Process}
-% 首先在数据的选择上，由于原始数据有将近十万首歌曲的数据，我们只需要对有一定影响力的艺术家创作的歌曲进行分析，因此选择由熵权法确定的影响力前100位的艺术家创作的歌曲，共计2万多首。 
-% 在具体的数据处理上，前文第二章中已经能够通过熵权法确定影响力前100位的艺术家名单，使用pandas对导出的表格进行选取，提取出对应艺术家的所有创作的歌曲。
+%% 首先在数据的选择上，由于原始数据有将近十万首歌曲的数据，我们只需要对有一定影响力的艺术家创作的歌曲进行分析，因此选择由熵权法确定的影响力前100位的艺术家创作的歌曲，共计2万多首。 
+First of all, in the selection of data, since the original data contains nearly 100,000 songs, we only need to analyze the songs created by influential artists, so we select the top 100 influential artists determined by the entropy weight method. He has composed more than 20,000 songs in total.
+%% 在具体的数据处理上，前文第二章中已经能够通过熵权法确定影响力前100位的艺术家名单，使用pandas对导出的表格进行选取，提取出对应艺术家的所有创作的歌曲。
+In terms of specific data processing, the list of the top 100 influential artists has been determined by the entropy weight method in the second chapter above, and pandas is used to select the exported table and extract all the songs created by the corresponding artist.
 
 \subsection{PCA Dimensionality Reduction}
-% 音乐的特征比较繁杂，不易提取特征，所以聚类的时候使用的是使用PCA将数据维度从12维降低到7维的数据，对结果进行处理。聚类的时候也加上了PCA里面的权重
-% PCA的权重部分的处理在第一章中已完成，我们知道了各个特征的PC值与权重，将数据从12维重新映射到7维上
+%% 音乐的特征比较繁杂，不易提取特征，所以聚类的时候使用的是使用PCA将数据维度从12维降低到7维的数据，对结果进行处理。聚类的时候也加上了PCA里面的权重。PCA的权重部分的处理在第一章中已完成，我们知道了各个特征的PC值与权重，将数据从12维重新映射到7维上
+The features of music are more complicated, and it is not easy to extract features, so when clustering, we use PCA to reduce the data dimension from 12 dimensions to 7 dimensions, and process the results. When clustering, the weights in PCA are also added. The processing of the weight part of PCA has been completed in the first chapter, we know the PC value and weight of each feature, and remap the data from 12 dimensions to 7 dimensions
+
 % tabel1: PCA.csv 
 % table2: original music data 
 % table3: final music data
 
-% https://blog.csdn.net/qq_27586341/article/details/103909954
-% https://www.jianshu.com/p/794e91f60170
-% https://www.latexstudio.net/archives/51640.html
+%% https://blog.csdn.net/qq_27586341/article/details/103909954
+%% https://www.jianshu.com/p/794e91f60170
+%% https://www.latexstudio.net/archives/51640.html
+%% https://zhuanlan.zhihu.com/p/184686598
 
 \section{Cluster Method}
-% 主要使用K-means和层次聚类的方法
-
-
-
+%% 主要使用K-means和层次聚类的方法
+Mainly using K-means and hierarchical clustering methods\\
 \subsection{K-means Cluster}
-% 聚类方法介绍
+%% 聚类方法介绍
+\subsubsection{Principle and Process}
+%% K-means聚类的基本思想是，通过迭代寻找K个簇（Cluster）的一种划分方案，使得聚类结果对应的损失函数最小。其中，损失函数可以定义为各个样本距离所属簇中心点的误差平方和：
+The basic idea of K-means clustering is to find a partitioning scheme of K clusters (Clusters) iteratively, so that the loss function corresponding to the clustering results is minimized. Among them, the loss function can be defined as the sum of squared errors of each sample from the center point of the cluster to which it belongs:
+\begin{equation}
+    J(c, \mu)=\sum_{i=1}^{M}\left\|x_{i}-\mu_{c_{i}}\right\|^{2}
+\end{equation}
+%% 其中 x_i 代表第 i 个样本， c_i 是 x_i 所属的簇， \mu_{c_i} 代表簇对应的中心点， M 是样本总数。
+Where $x_i$ represents the ith sample, $c_i$ is the cluster to which $x_i$ belongs, $\mu_{c_i}$ represents the center point corresponding to the cluster, and $M$ is the total number of samples.
+
+The core goal of K-Means is to divide a given dataset into K clusters (K is a hyperparameter) and give the center point corresponding to each sample data. The specific steps are very simple and can be divided into 4 steps:
+\begin{enumerate}[noitemsep]
+    \item Data preprocessing. Mainly standardization and outlier filtering.
+    \item Select K centers randomly, denoted as $\mu_{1}^{(0)}, \mu_{2}^{(0)}, \ldots, \mu_{k}^{(0)}$
+    \item Define loss function: $J(c, \mu)=\sum_{i=1}^{M}\left\|x_{i}-\mu_{c_{i}}\right\|^{2}$
+    \item Let t=0,1,2,... be the number of iteration steps, and repeat the following process until $J$ converges:
+    \begin{enumerate}
+        \item For each sample $x_i$, assign it to the nearest center:
+        \begin{equation}
+            c_{i}^{t}<-\operatorname{argmin}_{k}\left\|x_{i}-\mu_{k}^{t}\right\|^{2}
+        \end{equation}
+        \item For each class center k, recalculate the class center: 
+        \begin{equation}
+            \mu_{k}^{(t+1)}<-\operatorname{argmin}_{\mu} \sum_{i: c_{i}^{t}=k}^{b}\left\|x_{i}-\mu\right\|^{2}
+        \end{equation}
+    \end{enumerate}
+\end{enumerate}
+
+\subsubsection{Advantages and Disadvantages}
 
 \subsection{Hierarchical Cluster}
-\subsubsection{原理}
+\subsubsection{Principle and Process}
 % 层次聚类的方法是先计算样本间的距离，每次将距离最近的点合并到同一个类。然后，再计算类与类之间的距离，将距离最近的类合并为一个大类。不停的合并，直到合成了一个类。其中类与类的距离的计算方法有：最短距离法，最长距离法，中间距离法，类平均法等。比如最短距离法，将类与类的距离定义为类与类之间样本的最短距离。
 % 层次聚类算法根据层次分解的顺序分为：自下向上和自上向下，即凝聚的层次聚类算法和分裂的层次聚类算法（agglomerative和divisive），也可以理解为自下而上法（bottom-up）和自上而下法（top-down）。
 % 自下而上法：凝聚型层次聚类，就是一开始每个个体（object）都是一个类，然后根据linkage寻找同类，最后形成一个“类”。
-\subsubsection{流程}
-\subsubsection{优缺点}
+\subsubsection{Advantages and Disadvantages}
 
 \section{Cluster Evaluation}
 
